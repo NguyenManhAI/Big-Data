@@ -1,0 +1,1095 @@
+This message is shown once a day. To disable it please create the
+/home/wsl/.hushlogin file.
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB$ sudo systemctl start mongod        
+[sudo] password for wsl:
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB$ mongoimport --db movie --collection movieDetails --file data/movieDetails.json
+2024-05-08T07:24:20.719+0700    connected to: mongodb://localhost/
+2024-05-08T07:24:20.738+0700    100 document(s) imported successfully. 0 document(s) failed to import.
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/Mongwsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB$ mongosh
+Current Mongosh Log ID: 663ac6aaa1caaed9082202d7
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.5
+Using MongoDB:          7.0.9
+Using Mongosh:          2.2.5
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-05-08T07:23:03.710+07:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2024-05-08T07:23:04.084+07:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2024-05-08T07:23:04.084+07:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never' in this binary version
+   2024-05-08T07:23:04.084+07:00: vm.max_map_count is too low
+------
+
+test> use employee_db
+switched to db employee_db
+employee_db> db.createCollection("employee_info")
+{ ok: 1 }
+employee_db> show collections
+employee_info
+empoyee_info
+employee_db> db.employee_info.insertOne({"fname": "john", "lname": "doe", "salary": 70000, "departments": ["sales", "admin"], "hiredate": "2018-08-29"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('663ac6bfa1caaed9082202d8')
+}
+employee_db> db.employee_info.insertMany([
+... {"empno": 2, "fname": "sunil", "lname": "chakraborty", "role": "team lead", "departments": ["marketing", "finance"]},
+... {"empno": 3, "fname": "sally", "lname": "jones", "role": "team lead", "departments": ["hr", "admin"]}, 
+... {"empno": 4, "fname": "ben", "lname": "bradley", "role": "manager", "departments": ["legal"]}, 
+... {"empno": 5, "fname": "radha", "lname": "desai", "role": "worker"},
+... {"empno": 6, "fname": "shruti", "lname": "patel", "role": "worker"},
+... {"empno": 7, "fname": "mahesh", "lname": "iyer", "role": "manager"}
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('663ac706a1caaed9082202d9'),
+    '1': ObjectId('663ac706a1caaed9082202da'),
+    '2': ObjectId('663ac706a1caaed9082202db'),
+    '3': ObjectId('663ac706a1caaed9082202dc'),
+    '4': ObjectId('663ac706a1caaed9082202dd'),
+    '5': ObjectId('663ac706a1caaed9082202de')
+  }
+}
+employee_db> use pokemon_card
+switched to db pokemon_card
+pokemon_card> db.cards.count()
+DeprecationWarning: Collection.count() is deprecated. Use countDocuments or estimatedDocumentCount.
+102
+pokemon_card> db.cards.distinct("hp")
+[
+  '10', '100', '120',
+  '30', '40',  '50',
+  '60', '70',  '80',
+  '90'
+]
+pokemon_card> db.cards.count({"hp": "250"})
+0
+pokemon_card> db.cards.count({"hp":"250", "subtype":"GX"})
+0
+pokemon_card> db.cards.find({"hp":"250", "subtype":"GX"})
+
+pokemon_card> db.cards.find({"hp":"250", "subtype":"GX"}).pretty()
+
+pokemon_card> db.cards.find({"hp":"250", "subtype": "GX", "attacks.cost": "Colorless"}).pretty()
+
+pokemon_card> db.cards.find({"hp":"250", "subtype": "GX", "attacks.cost": ["Colorless", "Colorless"]}).pretty()
+
+pokemon_card> db.cards.find({"hp":"250", "subtype": "GX", "attacks.cost": "Colorless"}).pretty()
+
+pokemon_card> db.cards.find({"types.1": "Metal"}).pretty()
+
+pokemon_card> db.cards.find({"hp":"250", "subtype": "GX", "attacks.cost": "Colorless"}, {"name":1})
+
+pokemon_card> db.cards.find({"hp":"250", "subtype": "GX", "attacks.cost": "Colorless"}, {"name":1, "_id": 0})
+
+pokemon_card> db.movieDetails.deleteOne({"title": "Dawn of the Dead"}
+[1]+  Stopped                 mongosh
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB$ mongosh
+Current Mongosh Log ID: 663ac7a2d557f4b45a2202d7
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.5
+Using MongoDB:          7.0.9
+Using Mongosh:          2.2.5
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-05-08T07:23:03.710+07:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2024-05-08T07:23:04.084+07:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2024-05-08T07:23:04.084+07:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never' in this binary version
+   2024-05-08T07:23:04.084+07:00: vm.max_map_count is too low
+------
+
+test> show dbs
+admin          40.00 KiB
+config         72.00 KiB
+employee_db   112.00 KiB
+local          72.00 KiB
+movie          88.00 KiB
+mydatabase    344.00 KiB
+pokemon_card   64.00 KiB
+test> use movie
+switched to db movie
+movie> Dawn of the Dead
+[2]+  Stopped                 mongosh
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB$ mongosh
+Current Mongosh Log ID: 663ac7bb24a9ebc0b62202d7
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.5
+Using MongoDB:          7.0.9
+Using Mongosh:          2.2.5
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-05-08T07:23:03.710+07:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2024-05-08T07:23:04.084+07:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2024-05-08T07:23:04.084+07:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never' in this binary version
+   2024-05-08T07:23:04.084+07:00: vm.max_map_count is too low
+------
+
+test> use movie
+switched to db movie
+movie> db.movieDetails.deleteOne({"title": "Dawn of the Dead"})
+{ acknowledged: true, deletedCount: 1 }
+movie> db.movieDetails.deleteOne({"year": 2018.0})
+{ acknowledged: true, deletedCount: 0 }
+movie>
+movie> db.movieDetails.find({year: {"$lte": 1970}}, 
+...     {title: 1, _id: 0})
+[
+  { title: 'How the West Was Won' },
+  { title: 'Plan 9 from Outer Space' },
+  { title: 'The Greatest Show on Earth' },
+  { title: 'Show People' },
+  {
+    title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb'
+  },
+  { title: 'Once Upon a Time in the West' },
+  { title: 'West Side Story' },
+  { title: '2001: A Space Odyssey' },
+  { title: 'Show Boat' },
+  { title: 'From Russia with Love' },
+  { title: 'The Adventures of Robin Hood' },
+  { title: 'All Quiet on the Western Front' },
+  { title: 'Midnight Cowboy' },
+  { title: 'The Big Trail' },
+  { title: 'Planet of the Apes' },
+  { title: 'Beneath the Planet of the Apes' },
+  { title: 'The Kid' },
+  { title: 'Western Union' },
+  { title: 'Carry on Cowboy' },
+  { title: 'Santa Fe Trail' }
+]
+Type "it" for more
+movie> db.movieDetails.find({year: {"$lte": 1970, "$gt": 1965}}, 
+...     {title: 1, _id: 0})
+[
+  { title: 'Once Upon a Time in the West' },
+  { title: '2001: A Space Odyssey' },
+  { title: 'Midnight Cowboy' },
+  { title: 'Planet of the Apes' },
+  { title: 'Beneath the Planet of the Apes' }
+]
+movie> db.movieDetails.find({"runtime": {"$gt": 180},
+...     "imdb.rating": {"$gt":8}}, 
+...     {"title": 1, "_id": 0})
+
+movie> db.movieDetails.find({"rated": {"$ne": "NOT RATED"}},
+...     {"_id":0, "title":1, "rated":1})
+[
+  { title: 'Wild Wild West', rated: 'PG-13' },
+  { title: 'Love & Other Drugs', rated: 'R' },
+  { title: 'How the West Was Won', rated: 'APPROVED' },
+  { title: 'The Many Adventures of Winnie the Pooh', rated: 'G' },
+  { title: 'Plan 9 from Outer Space', rated: 'UNRATED' },
+  { title: 'Punch-Drunk Love', rated: 'R' },
+  { title: 'Quiz Show', rated: 'PG-13' },
+  { title: 'Journey to the West', rated: 'PG-13' },
+  { title: 'The Adventures of Sharkboy and Lavagirl 3-D', rated: 'PG' },
+  { title: 'I Love You Phillip Morris', rated: 'R' },
+  { title: 'Office Space', rated: 'R' },
+  {
+    title: 'The Adventures of Priscilla, Queen of the Desert',    
+    rated: 'R'
+  },
+  { title: 'An American Tail: Fievel Goes West', rated: 'G' },    
+  { title: 'Star Wars: Episode VI - Return of the Jedi', rated: 'PG' },
+  { title: 'Star Wars: Episode IV - A New Hope', rated: 'PG' },   
+  { title: 'Star Trek', rated: 'PG-13' },
+  { title: 'Lost in Space', rated: 'PG-13' },
+  { title: 'Love Actually', rated: 'R' },
+  { title: 'Dead Poets Society', rated: 'PG' },
+  {
+    title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+    rated: 'PG'
+  }
+]
+Type "it" for more
+movie> db.movieDetails.find({"genres": {"$in": ["Sport", "Talk-Show", "News"]}},
+...     {"_id":0, "title":1, "genres":1})
+
+movie> db.movieDetails.find({"$or": [
+...     {"imdb.rating": {"$gt": 8.5}},
+...     {"metacritic": {"$gt": 85}}]}, 
+...         {"_id": 0, "title": 1, "imdb.rating": 1, "metacritic":
+ 1})
+[
+  { title: 'Quiz Show', imdb: { rating: 7.5 }, metacritic: 88 },  
+  {
+    title: 'Star Wars: Episode IV - A New Hope',
+    imdb: { rating: 8.7 },
+    metacritic: 92
+  },
+  {
+    title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+    imdb: { rating: 8.5 },
+    metacritic: 96
+  },
+  {
+    title: 'Once Upon a Time in the West',
+    imdb: { rating: 8.6 },
+    metacritic: 80
+  },
+  {
+    title: '2001: A Space Odyssey',
+    imdb: { rating: 8.3 },
+    metacritic: 86
+  },
+  {
+    title: 'Shakespeare in Love',
+    imdb: { rating: 7.2 },
+    metacritic: 87
+  },
+  {
+    title: 'Star Wars: Episode V - The Empire Strikes Back',      
+    imdb: { rating: 8.8 },
+    metacritic: 79
+  },
+  { title: 'The Truman Show', imdb: { rating: 8.1 }, metacritic: 90 },
+  {
+    title: 'The Adventures of Robin Hood',
+    imdb: { rating: 8 },
+    metacritic: 97
+  },
+  {
+    title: 'The Kid with a Bike',
+    imdb: { rating: 7.4 },
+    metacritic: 87
+  }
+]
+movie> db.movieDetails.find({
+...     "tomato.meter": {"$lt": 50}, 
+...     "tomato.meter": {"$ne": null}},
+...     {"_id": 0, "title": 1, "tomato.meter": 1})
+[
+  { title: 'Wild Wild West', tomato: { meter: 17 } },
+  { title: 'Love & Other Drugs', tomato: { meter: 49 } },
+  { title: 'Punch-Drunk Love', tomato: { meter: 79 } },
+  { title: 'Quiz Show', tomato: { meter: 96 } },
+  { title: 'Journey to the West', tomato: { meter: 93 } },        
+  {
+    title: 'The Adventures of Sharkboy and Lavagirl 3-D',
+    tomato: { meter: 20 }
+  },
+  { title: 'I Love You Phillip Morris', tomato: { meter: 72 } },  
+  { title: 'Office Space', tomato: { meter: 79 } },
+  {
+    title: 'The Adventures of Priscilla, Queen of the Desert',    
+    tomato: { meter: 93 }
+  },
+  {
+    title: 'Star Wars: Episode VI - Return of the Jedi',
+    tomato: { meter: 80 }
+  },
+  {
+    title: 'Star Wars: Episode IV - A New Hope',
+    tomato: { meter: 94 }
+  },
+  { title: 'Star Trek', tomato: { meter: 95 } },
+  { title: 'Lost in Space', tomato: { meter: 27 } },
+  { title: 'Love Actually', tomato: { meter: 63 } },
+  { title: 'Dead Poets Society', tomato: { meter: 85 } },
+  {
+    title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+    tomato: { meter: 99 }
+  },
+  {
+    title: 'The Adventures of Rocky & Bullwinkle',
+    tomato: { meter: 43 }
+  },
+  { title: 'The Rocky Horror Picture Show', tomato: { meter: 80 } },
+  { title: 'Once Upon a Time in the West', tomato: { meter: 98 } },
+  { title: 'Slow West', tomato: { meter: 92 } }
+]
+Type "it" for more
+movie> db.movieDetails.count({"poster": {"$exists": true}})
+DeprecationWarning: Collection.count() is deprecated. Use countDocuments or estimatedDocumentCount.
+99
+movie> db.movieDetails.count({"poster": null})
+0
+movie> db.movieDetails.find({"plot": {"$type": "string"}}).pretty()
+[
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a796'),
+    title: 'Wild Wild West',
+    year: 1999,
+    rated: 'PG-13',
+    runtime: 106,
+    countries: [ 'USA' ],
+    genres: [ 'Action', 'Western', 'Comedy' ],
+    director: 'Barry Sonnenfeld',
+    writers: [
+      'Jim Thomas',
+      'John Thomas',
+      'S.S. Wilson',
+      'Brent Maddock',
+      'Jeffrey Price',
+      'Peter S. Seaman'
+    ],
+    actors: [ 'Will Smith', 'Kevin Kline', 'Kenneth Branagh', 'Salma Hayek' ],
+    plot: 'The two best hired guns in the West must save President Grant from the clutches of a nineteenth-century inventor-villain.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BNDI5NDk5MjgxMl5BMl5BanBnXkFtZTcwNjI1MTUyMQ@@._V1_SX300.jpg',
+    imdb: { id: 'tt0120891', rating: 4.8, votes: 124558 },        
+    tomato: {
+      meter: 17,
+      image: 'rotten',
+      rating: 4.1,
+      reviews: 130,
+      fresh: 22,
+      consensus: 'Bombastic, manic, and largely laugh-free, Wild Wild West is a bizarre misfire in which greater care was lavished upon the special effects than on the script.',
+      userMeter: 28,
+      userRating: 2.7,
+      userReviews: 463740
+    },
+    metacritic: 38,
+    awards: { wins: 10, nominations: 11, text: '10 wins & 11 nominations.' },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7ad'),
+    title: 'Love & Other Drugs',
+    year: 2010,
+    rated: 'R',
+    runtime: 112,
+    countries: [ 'USA' ],
+    genres: [ 'Comedy', 'Drama', 'Romance' ],
+    director: 'Edward Zwick',
+    writers: [
+      'Charles Randolph',
+      'Edward Zwick',
+      'Marshall Herskovitz',
+      'Jamie Reidy'
+    ],
+    actors: [
+      'Jake Gyllenhaal',
+      'Anne Hathaway',
+      'Oliver Platt',
+      'Hank Azaria'
+    ],
+    plot: "A young woman suffering from Parkinson's befriends a drug rep working for Pfizer in 1990s Pittsburgh.",
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTgxOTczODEyMF5BMl5BanBnXkFtZTcwMDc0NDY4Mw@@._V1_SX300.jpg',
+    imdb: { id: 'tt0758752', rating: 6.7, votes: 134363 },        
+    tomato: {
+      meter: 49,
+      image: 'rotten',
+      rating: 5.8,
+      reviews: 160,
+      fresh: 78,
+      consensus: "It's a pleasure to see Hollywood produce a romance this refreshingly adult, but Love and Other Drugs struggles to find a balance between its disparate plot elements.",
+      userMeter: 53,
+      userRating: 3.3,
+      userReviews: 73737
+    },
+    metacritic: 55,
+    awards: {
+      wins: 1,
+      nominations: 5,
+      text: 'Nominated for 2 Golden Globes. Another 1 win & 5 nominations.'
+    },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a79b'),
+    title: 'How the West Was Won',
+    year: 1962,
+    rated: 'APPROVED',
+    runtime: 164,
+    countries: [ 'USA' ],
+    genres: [ 'Western' ],
+    director: 'John Ford, Henry Hathaway, George Marshall, Richard Thorpe',
+    writers: [ 'James R. Webb' ],
+    actors: [ 'Carroll Baker', 'Lee J. Cobb', 'Henry Fonda', 'Carolyn Jones' ],
+    plot: 'A family saga covering several decades of Westward expansion in the nineteenth century--including the Gold Rush, the Civil War, and the building of the railroads.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BNTk2NDk1NjY0MV5BMl5BanBnXkFtZTgwMzkzNTcxMTE@._V1_SX300.jpg',
+    imdb: { id: 'tt0056085', rating: 7.1, votes: 13640 },
+    awards: {
+      wins: 7,
+      nominations: 5,
+      text: 'Won 3 Oscars. Another 7 wins & 5 nominations.'       
+    },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7c1'),
+    title: 'The Many Adventures of Winnie the Pooh',
+    year: 1977,
+    rated: 'G',
+    runtime: 74,
+    countries: [ 'USA' ],
+    genres: [ 'Animation', 'Family', 'Musical' ],
+    director: 'John Lounsbery, Wolfgang Reitherman',
+    writers: [
+      'A.A. Milne',
+      'Larry Clemmons',
+      'Ralph Wright',
+      'Vance Gerry',
+      'Xavier Atencio',
+      'Ken Anderson',
+      'Julius Svendsen',
+      'Ted Berman',
+      'Eric Cleworth',
+      'Winston Hibler'
+    ],
+    actors: [
+      'Sebastian Cabot',
+      'Junius Matthews',
+      'Barbara Luddy',
+      'Howard Morris'
+    ],
+    plot: 'A collection of animated shorts based on the stories and characters by A. A. Milne.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTY3OTkyMzYwNV5BMl5BanBnXkFtZTcwMzkzODU0MQ@@._V1_SX300.jpg',
+    imdb: { id: 'tt0076363', rating: 7.6, votes: 22830 },
+    awards: { wins: 0, nominations: 1, text: '1 nomination.' },   
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7b7'),
+    title: 'Plan 9 from Outer Space',
+    year: 1959,
+    rated: 'UNRATED',
+    runtime: 79,
+    countries: [ 'USA' ],
+    genres: [ 'Horror', 'Sci-Fi' ],
+    director: 'Edward D. Wood Jr.',
+    writers: [ 'Edward D. Wood Jr.' ],
+    actors: [ 'Gregory Walcott', 'Mona McKinnon', 'Duke Moore', 'Tom Keene' ],
+    plot: 'Aliens resurrect dead humans as zombies and vampires to stop humanity from creating the Solaranite (a sort of sun-driven bomb).',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMzUzMzA0NDE3MF5BMl5BanBnXkFtZTgwMzg1Mjc1MDE@._V1_SX300.jpg',
+    imdb: { id: 'tt0052077', rating: 4, votes: 29171 },
+    awards: { wins: 0, nominations: 0, text: '' },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7ae'),
+    title: 'Punch-Drunk Love',
+    year: 2002,
+    rated: 'R',
+    runtime: 95,
+    countries: [ 'USA' ],
+    genres: [ 'Comedy', 'Drama', 'Romance' ],
+    director: 'Paul Thomas Anderson',
+    writers: [ 'Paul Thomas Anderson' ],
+    actors: [ 'Adam Sandler', 'Jason Andrews', 'Don McManus', 'Emily Watson' ],
+    plot: 'A psychologically troubled novelty supplier is nudged towards a romance with an English woman, all the while being extorted by a phone-sex line run by a crooked mattress salesman, and purchasing stunning amounts of pudding.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BOTcwMDMxMjg2NF5BMl5BanBnXkFtZTYwNzg0MDc3._V1_SX300.jpg',
+    imdb: { id: 'tt0272338', rating: 7.3, votes: 104292 },        
+    tomato: {
+      meter: 79,
+      image: 'certified',
+      rating: 7.4,
+      reviews: 184,
+      fresh: 145,
+      consensus: "Odd, touching, and unique, Punch-Drunk Love is also delightfully funny, utilizing Adam Sandler's comic persona to explore the life of a lonely guy who finds love.",
+      userMeter: 77,
+      userRating: 3.3,
+      userReviews: 138756
+    },
+    metacritic: 78,
+    awards: {
+      wins: 14,
+      nominations: 28,
+      text: 'Nominated for 1 Golden Globe. Another 14 wins & 28 nominations.'
+    },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7c8'),
+    title: 'Quiz Show',
+    year: 1994,
+    rated: 'PG-13',
+    runtime: 133,
+    countries: [ 'USA' ],
+    genres: [ 'Drama', 'History' ],
+    director: 'Robert Redford',
+    writers: [ 'Paul Attanasio', 'Richard N. Goodwin' ],
+    actors: [ 'John Turturro', 'Rob Morrow', 'Ralph Fiennes', 'Paul Scofield' ],
+    plot: "A young lawyer, Richard Goodwin, investigates a potentially fixed game show. Charles Van Doren, a big time show winner, is under Goodwin's investigation.",
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTc2NTU3MTY4Nl5BMl5BanBnXkFtZTcwNTc1NzkxMQ@@._V1_SX300.jpg',
+    imdb: { id: 'tt0110932', rating: 7.5, votes: 51692 },
+    tomato: {
+      meter: 96,
+      image: 'certified',
+      rating: 8.2,
+      reviews: 53,
+      fresh: 51,
+      consensus: 'Robert Redford refracts the sociopolitical and moral issues posed by the subject material through a purely entertaining, well-acted lens.',
+      userMeter: 86,
+      userRating: 3.6,
+      userReviews: 30669
+    },
+    metacritic: 88,
+    awards: {
+      wins: 5,
+      nominations: 23,
+      text: 'Nominated for 4 Oscars. Another 5 wins & 23 nominations.'
+    },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7cc'),
+    title: 'The Greatest Show on Earth',
+    year: 1952,
+    rated: 'NOT RATED',
+    runtime: 152,
+    countries: [ 'USA' ],
+    genres: [ 'Drama', 'Family', 'Romance' ],
+    director: 'Cecil B. DeMille',
+    writers: [
+      'Fredric M. Frank',
+      'Barré Lyndon',
+      'Theodore St. John',
+      'Fredric M. Frank',
+      'Theodore St. John',
+      'Frank Cavett'
+    ],
+    actors: [
+      'Betty Hutton',
+      'Cornel Wilde',
+      'Charlton Heston',
+      'Dorothy Lamour'
+    ],
+    plot: 'The dramatic lives of trapeze artists, a clown, and an elephant trainer against a background of circus spectacle.',      
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTgzMTA1MDM5NV5BMl5BanBnXkFtZTgwNjg5NDc2MjE@._V1_SX300.jpg',
+    imdb: { id: 'tt0044672', rating: 6.7, votes: 8952 },
+    awards: {
+      wins: 4,
+      nominations: 5,
+      text: 'Won 2 Oscars. Another 4 wins & 5 nominations.'       
+    },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a79c'),
+    title: 'Journey to the West',
+    year: 2013,
+    rated: 'PG-13',
+    runtime: 110,
+    countries: [ 'China' ],
+    genres: [ 'Adventure', 'Comedy', 'Fantasy' ],
+    director: 'Stephen Chow, Chi-kin Kwok',
+    writers: [
+      'Stephen Chow',
+      'Chi-kin Kwok',
+      'Xin Huo',
+      'Yun Wang',
+      'Chi Keung Fung',
+      'Zhengyu Lu',
+      'Shing-Cheung Lee',
+      'Ivy Kong'
+    ],
+    actors: [ 'Qi Shu', 'Zhang Wen', 'Bo Huang', 'Show Luo' ],    
+    plot: 'Tang Sanzang, an aspiring Buddhist hero tries to protect a village from three demons. He develops complex feelings for Miss Duan, the demon hunter who repeatedly helps him, and finally quests to meet the legendary Monkey King.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTQzMzUxNzk0NV5BMl5BanBnXkFtZTgwMTEwOTE4MDE@._V1_SX300.jpg',
+    imdb: { id: 'tt2017561', rating: 6.8, votes: 7111 },
+    tomato: {
+      meter: 93,
+      image: 'fresh',
+      rating: 7.2,
+      reviews: 30,
+      fresh: 28,
+      consensus: "As sweet, silly, action-packed and ridiculous as director Steven Chow's best work, Journey to the West serves up dazzling action sequences while playing its disparate elements against each other with thrilling abandon.",
+      userMeter: 68,
+      userRating: 3.6,
+      userReviews: 2198
+    },
+    metacritic: 68,
+    awards: { wins: 1, nominations: 12, text: '1 win & 12 nominations.' },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7cf'),
+    title: 'Show People',
+    year: 1928,
+    rated: 'NOT RATED',
+    runtime: 83,
+    countries: [ 'USA' ],
+    genres: [ 'Comedy', 'Romance' ],
+    director: 'King Vidor',
+    writers: [
+      'Agnes Christine Johnston',
+      'Laurence Stallings',
+      'Wanda Tuchock',
+      'Ralph Spence'
+    ],
+    actors: [
+      'Marion Davies',
+      'William Haines',
+      'Dell Henderson',
+      'Paul Ralli'
+    ],
+    plot: 'A young lady from Georgia goes to Hollywood in the hopes of becoming an actress.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTQ3MTUwMTg2Nl5BMl5BanBnXkFtZTgwMTM2ODAyMjE@._V1_SX300.jpg',
+    imdb: { id: 'tt0019379', rating: 8.2, votes: 2721 },
+    awards: { wins: 1, nominations: 0, text: '1 win.' },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7c2'),
+    title: 'The Adventures of Sharkboy and Lavagirl 3-D',
+    year: 2005,
+    rated: 'PG',
+    runtime: 93,
+    countries: [ 'USA' ],
+    genres: [ 'Action', 'Adventure', 'Family' ],
+    director: 'Robert Rodriguez',
+    writers: [ 'Robert Rodriguez', 'Marcel Rodriguez', 'Racer Rodriguez' ],
+    actors: [
+      'Taylor Lautner',
+      'Taylor Dooley',
+      'Cayden Boyd',
+      'George Lopez'
+    ],
+    plot: 'A young boy is recruited by his imaginary friends Sharkboy and Lavagirl to help save their planet.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTM1NzI3OTAwMl5BMl5BanBnXkFtZTcwMTI3ODkyMQ@@._V1_SX300.jpg',
+    imdb: { id: 'tt0424774', rating: 3.5, votes: 18621 },
+    tomato: {
+      meter: 20,
+      image: 'rotten',
+      rating: 4.3,
+      reviews: 123,
+      fresh: 24,
+      consensus: 'The decision to turn this kiddie fantasy into a 3-D film was a miscalculation.',
+      userMeter: 31,
+      userRating: 2.5,
+      userReviews: 31651
+    },
+    metacritic: 38,
+    awards: { wins: 1, nominations: 10, text: '1 win & 10 nominations.' },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7b1'),
+    title: 'I Love You Phillip Morris',
+    year: 2009,
+    rated: 'R',
+    runtime: 98,
+    countries: [ 'France', 'USA' ],
+    genres: [ 'Biography', 'Comedy', 'Crime' ],
+    director: 'Glenn Ficarra, John Requa',
+    writers: [ 'John Requa', 'Glenn Ficarra', 'Steve McVicker' ], 
+    actors: [ 'Jim Carrey', 'Ewan McGregor', 'Leslie Mann', 'Rodrigo Santoro' ],
+    plot: "A cop turns con man once he comes out of the closet. Once imprisoned, he meets the second love of his life, whom he'll stop at nothing to be with.",
+    poster: 'http://ia.media-imdb.com/images/M/MV5BNDkzMjkwNjc5NV5BMl5BanBnXkFtZTcwNzEyOTk5Mw@@._V1_SX300.jpg',
+    imdb: { id: 'tt1045772', rating: 6.7, votes: 73578 },
+    tomato: {
+      meter: 72,
+      image: 'certified',
+      rating: 6.6,
+      reviews: 152,
+      fresh: 109,
+      consensus: "This fact-based romantic comedy has its flaws, but they're mostly overcome by its consistently sweet, funny tone and one of the best performances of Jim Carrey's career.",
+      userMeter: 61,
+      userRating: 3.3,
+      userReviews: 88181
+    },
+    metacritic: 65,
+    awards: { wins: 5, nominations: 8, text: '5 wins & 8 nominations.' },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7b3'),
+    title: 'Office Space',
+    year: 1999,
+    rated: 'R',
+    runtime: 89,
+    countries: [ 'USA' ],
+    genres: [ 'Comedy' ],
+    director: 'Mike Judge',
+    writers: [ 'Mike Judge', 'Mike Judge' ],
+    actors: [
+      'Ron Livingston',
+      'Jennifer Aniston',
+      'David Herman',
+      'Ajay Naidu'
+    ],
+    plot: 'Three company workers who hate their jobs decide to rebel against their greedy boss.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BOTA5MzQ3MzI1NV5BMl5BanBnXkFtZTgwNTcxNTYxMTE@._V1_SX300.jpg',
+    imdb: { id: 'tt0151804', rating: 7.8, votes: 192080 },        
+    tomato: {
+      meter: 79,
+      image: 'certified',
+      rating: 6.8,
+      reviews: 95,
+      fresh: 75,
+      consensus: 'Mike Judge lampoons the office grind with its inspired mix of sharp dialogue and witty one-liners.',
+      userMeter: 93,
+      userRating: 4,
+      userReviews: 324362
+    },
+    metacritic: 68,
+    awards: { wins: 0, nominations: 2, text: '2 nominations.' },  
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7bf'),
+    title: 'The Adventures of Priscilla, Queen of the Desert',    
+    year: 1994,
+    rated: 'R',
+    runtime: 104,
+    countries: [ 'Australia', 'UK' ],
+    genres: [ 'Comedy', 'Music' ],
+    director: 'Stephan Elliott',
+    writers: [ 'Stephan Elliott' ],
+    actors: [
+      'Hugo Weaving',
+      'Guy Pearce',
+      'Terence Stamp',
+      'Rebel Penfold-Russell'
+    ],
+    plot: 'Two drag queens and a transsexual travel across the desert to perform their unique style of cabaret.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTc5MDU1NzcyN15BMl5BanBnXkFtZTcwMDA0ODYyNA@@._V1_SX300.jpg',
+    imdb: { id: 'tt0109045', rating: 7.5, votes: 35048 },
+    tomato: {
+      meter: 93,
+      image: 'fresh',
+      rating: 7.1,
+      reviews: 30,
+      fresh: 28,
+      consensus: 'While its premise is ripe for comedy -- and it certainly delivers its fair share of laughs -- Priscilla is also a surprisingly tender and thoughtful road movie with some outstanding performances.',
+      userMeter: 88,
+      userRating: 3.7,
+      userReviews: 44128
+    },
+    metacritic: 68,
+    awards: {
+      wins: 9,
+      nominations: 16,
+      text: 'Won 1 Oscar. Another 9 wins & 16 nominations.'       
+    },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a799'),
+    title: 'An American Tail: Fievel Goes West',
+    year: 1991,
+    rated: 'G',
+    runtime: 75,
+    countries: [ 'USA' ],
+    genres: [ 'Animation', 'Adventure', 'Family' ],
+    director: 'Phil Nibbelink, Simon Wells',
+    writers: [ 'Flint Dille', 'Charles Swenson', 'David Kirschner' ],
+    actors: [
+      'Phillip Glasser',
+      'James Stewart',
+      'Erica Yohn',
+      'Cathy Cavadini'
+    ],
+    plot: 'A family of Emigre mice decide to move out to the west, unaware that they are falling into a trap perpetrated by a smooth talking cat.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTYzODMxNTUyNF5BMl5BanBnXkFtZTcwMTAwMzQyMQ@@._V1_SX300.jpg',
+    imdb: { id: 'tt0101329', rating: 6.4, votes: 16013 },
+    awards: { wins: 0, nominations: 0, text: '' },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7a0'),
+    title: 'Star Wars: Episode VI - Return of the Jedi',
+    year: 1983,
+    rated: 'PG',
+    runtime: 131,
+    countries: [ 'USA' ],
+    genres: [ 'Action', 'Adventure', 'Fantasy' ],
+    director: 'Richard Marquand',
+    writers: [ 'Lawrence Kasdan', 'George Lucas', 'George Lucas' ],
+    actors: [
+      'Mark Hamill',
+      'Harrison Ford',
+      'Carrie Fisher',
+      'Billy Dee Williams'
+    ],
+    plot: 'After rescuing Han Solo from the palace of Jabba the Hutt, the rebels attempt to destroy the second Death Star, while Luke struggles to make Vader return from the dark side of the Force.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTQ0MzI1NjYwOF5BMl5BanBnXkFtZTgwODU3NDU2MTE@._V1._CR93,97,1209,1861_SX89_AL_.jpg_V1_SX300.jpg',
+    imdb: { id: 'tt0086190', rating: 8.4, votes: 623252 },        
+    tomato: {
+      meter: 80,
+      image: 'certified',
+      rating: 7.2,
+      reviews: 84,
+      fresh: 67,
+      consensus: 'Though failing to reach the cinematic heights of its predecessors, Return of the Jedi remains an entertaining sci-fi adventure and a fitting end to the classic trilogy.',
+      userMeter: 94,
+      userRating: 4,
+      userReviews: 1003937
+    },
+    metacritic: 52,
+    awards: {
+      wins: 15,
+      nominations: 15,
+      text: 'Nominated for 4 Oscars. Another 15 wins & 15 nominations.'
+    },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a79e'),
+    title: 'Star Wars: Episode IV - A New Hope',
+    year: 1977,
+    rated: 'PG',
+    runtime: 121,
+    countries: [ 'USA' ],
+    genres: [ 'Action', 'Adventure', 'Fantasy' ],
+    director: 'George Lucas',
+    writers: [ 'George Lucas' ],
+    actors: [
+      'Mark Hamill',
+      'Harrison Ford',
+      'Carrie Fisher',
+      'Peter Cushing'
+    ],
+    plot: "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a wookiee and two droids to save the universe from the Empire's world-destroying battle-station, while also attempting to rescue Princess Leia from the evil Darth Vader.",
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTU4NTczODkwM15BMl5BanBnXkFtZTcwMzEyMTIyMw@@._V1_SX300.jpg',
+    imdb: { id: 'tt0076759', rating: 8.7, votes: 822849 },        
+    tomato: {
+      meter: 94,
+      image: 'certified',
+      rating: 8.5,
+      reviews: 99,
+      fresh: 93,
+      consensus: 'A legendarily expansive and ambitious start to the sci-fi saga, George Lucas opened our eyes to the possibilities of blockbuster filmmaking and things have never been the same.',  
+      userMeter: 96,
+      userRating: 4.1,
+      userReviews: 851120
+    },
+    metacritic: 92,
+    awards: {
+      wins: 38,
+      nominations: 27,
+      text: 'Won 6 Oscars. Another 38 wins & 27 nominations.'     
+    },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7a3'),
+    title: 'Star Trek',
+    year: 2009,
+    rated: 'PG-13',
+    runtime: 127,
+    countries: [ 'USA', 'Germany' ],
+    genres: [ 'Action', 'Adventure', 'Sci-Fi' ],
+    director: 'J.J. Abrams',
+    writers: [ 'Roberto Orci', 'Alex Kurtzman', 'Gene Roddenberry' ],
+    actors: [ 'Chris Pine', 'Zachary Quinto', 'Leonard Nimoy', 'Eric Bana' ],
+    plot: "The brash James T. Kirk tries to live up to his father's legacy with Mr. Spock keeping him in check as a vengeful, time-traveling Romulan creates black holes to destroy the Federation one planet at a time.",
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMjE5NDQ5OTE4Ml5BMl5BanBnXkFtZTcwOTE3NDIzMw@@._V1_SX300.jpg',
+    imdb: { id: 'tt0796366', rating: 8, votes: 483229 },
+    tomato: {
+      meter: 95,
+      image: 'certified',
+      rating: 8.2,
+      reviews: 329,
+      fresh: 312,
+      consensus: 'Star Trek reignites a classic franchise with action, humor, a strong story, and brilliant visuals, and will please traditional Trekkies and new fans alike.',
+      userMeter: 91,
+      userRating: 4.1,
+      userReviews: 743375
+    },
+    metacritic: 82,
+    awards: {
+      wins: 22,
+      nominations: 77,
+      text: 'Won 1 Oscar. Another 22 wins & 77 nominations.'      
+    },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7b6'),
+    title: 'Lost in Space',
+    year: 1998,
+    rated: 'PG-13',
+    runtime: 130,
+    countries: [ 'USA' ],
+    genres: [ 'Action', 'Adventure', 'Family' ],
+    director: 'Stephen Hopkins',
+    writers: [ 'Irwin Allen', 'Akiva Goldsman' ],
+    actors: [
+      'William Hurt',
+      'Mimi Rogers',
+      'Heather Graham',
+      'Lacey Chabert'
+    ],
+    plot: 'The Robinson family was going into space to fight for a chance for humanity. Now they are fighting to live long enough to find a way home.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTkwNzEyNTgyN15BMl5BanBnXkFtZTcwODk4NTU0Mg@@._V1_SX300.jpg',
+    imdb: { id: 'tt0120738', rating: 5.1, votes: 56757 },
+    tomato: {
+      meter: 27,
+      image: 'rotten',
+      rating: 4.7,
+      reviews: 84,
+      fresh: 23,
+      consensus: "Clumsily directed and missing most of the TV series' campy charm, Lost in Space sadly lives down to its title.",  
+      userMeter: 24,
+      userRating: 2.5,
+      userReviews: 173585
+    },
+    metacritic: 42,
+    awards: { wins: 1, nominations: 13, text: '1 win & 13 nominations.' },
+    type: 'movie'
+  },
+  {
+    _id: ObjectId('5f3149e44ea473d321c2a7a9'),
+    title: 'Love Actually',
+    year: 2003,
+    rated: 'R',
+    runtime: 135,
+    countries: [ 'UK', 'USA', 'France' ],
+    genres: [ 'Comedy', 'Drama', 'Romance' ],
+    director: 'Richard Curtis',
+    writers: [ 'Richard Curtis' ],
+    actors: [ 'Bill Nighy', 'Gregor Fisher', 'Rory MacGregor', 'Colin Firth' ],
+    plot: 'Follows the lives of eight very different couples in dealing with their love lives in various loosely interrelated tales all set during a frantic month before Christmas in London, England.',
+    poster: 'http://ia.media-imdb.com/images/M/MV5BMTY4NjQ5NDc0Nl5BMl5BanBnXkFtZTYwNjk5NDM3._V1_SX300.jpg',
+    imdb: { id: 'tt0314331', rating: 7.7, votes: 306036 },        
+    tomato: {
+      meter: 63,
+      image: 'fresh',
+      rating: 6.4,
+      reviews: 192,
+      fresh: 120,
+      consensus: 'A sugary tale overstuffed with too many stories. Still, the cast charms.',
+      userMeter: 72,
+      userRating: 3.1,
+      userReviews: 31625241
+    },
+    metacritic: 55,
+    awards: {
+      wins: 10,
+      nominations: 24,
+      text: 'Nominated for 2 Golden Globes. Another 10 wins & 24 nominations.'
+    },
+    type: 'movie'
+  }
+]
+Type "it" for more
+movie> db.movieDetails.find({"plot": {"$type": "null"}}).pretty()
+
+movie> db.movieDetails.find({"genres": {"$all": ['History', 'War']}},
+... {"_id": 0, "title": 1, "genres": 1})
+
+movie> var1 = db.movieDetails.findOne({"title": "Shutter Island"})
+
+null
+TypeError: Cannot convert undefined or null to object
+movie> var1 = db.movieDetails.findOne({"title": "Shutter Island"})delete var1._id
+Uncaught:
+SyntaxError: Missing semicolon. (1:59)
+
+> 1 | var1 = db.movieDetails.findOne({"title": "Shutter Island"})delete var1._id
+    |                                                            ^  2 |
+
+movie> db.movieDetails.find({"boxOffice.country": "America",
+... "boxOffice.revenue": {"$gt": 100}}).pretty()
+
+movie> db.movieDetails.find({"boxOffice.country": "America",
+...     "boxOffice.revenue": {"$gt": 150}}).pretty()
+
+movie> db.movieDetails.find({"countries": {"$size": 6}},
+...   {"_id": 0, "title": 1, "countries": 1})
+test> show collections
+
+test> show dbs
+admin          40.00 KiB
+config        108.00 KiB
+employee_db   112.00 KiB
+local          72.00 KiB
+movie         168.00 KiB
+mydatabase    344.00 KiB
+player          8.00 KiB
+pokemon_card   64.00 KiB
+test> use player
+switched to db player
+player> show collections
+cricket_players
+player> db.cricket_players.aggregate([
+...     {$group: 
+... {_id: "$Batting_Hand", 
+... playerCountByBattingHand: {$sum: 1}
+...  }
+... }
+... ])
+[ { _id: null, playerCountByBattingHand: 21794 } ]
+player> db.cricket_players.aggregate([
+...     {$group: 
+...         {_id : "$Country", 
+...         playerCountByCountry : {$sum: 1}
+...         }
+...     }
+... ])
+[ { _id: null, playerCountByCountry: 21794 } ]
+player> db.cricket_players.aggregate([
+...     {$group:
+...         {_id:{"Country":"$Country",
+...         "Batting_Hand":"$Batting_Hand"}, 
+...         playerCount:{$sum:1}
+...         }
+...     }
+... ])
+[ { _id: {}, playerCount: 21794 } ]
+player> db.cricket_players.aggregate([
+...     {$match:
+...         {Batting_Hand:{$ne: "NULL"}}
+...     },
+...     {$group:
+...         {_id : "$Batting_Hand", 
+...         playerCountByBattingHand : {$sum: 1}
+...         }
+...     }
+... ])
+[ { _id: null, playerCountByBattingHand: 21794 } ]
+player> db.cricket_players.aggregate([
+...     {$match: 
+...         {Country:{$ne: "NULL"}}
+...     },
+...     {$group:
+...         {_id : "$Country", 
+...         playerCount : {$sum: 1}
+...         }
+...     }
+... ])
+[ { _id: null, playerCount: 21794 } ]
+player> db.cricket_players.aggregate([
+...     {$match:
+...         {Batting_Hand:{$ne:"NULL"}}
+...     },
+...     {$group:
+...         {_id:{"Country":"$Country", 
+...         "Batting_Hand":"$Batting_Hand"}, 
+...         playerCount:{$sum:1}
+...         }
+...     },
+...     {$sort:
+...         {_id:1}
+...     }
+... ])
+[ { _id: {}, playerCount: 21794 } ]
+player> db.employee_info.aggregate([{$unwind: "$departments"}]).pretty()
+
+player> db.employee_info.aggregate([{$unwind: {path: "$departments"}}]).pretty()
+
+player> db.employee_info.aggregate([{$unwind: {
+...     path: "$departments", 
+...     includeArrayIndex: "arrayIndex"
+...     }}]).pretty()
+
+player> db.employee_info.aggregate([
+...     {$unwind: "$departments"},
+...     {$group:
+...         {_id:{firstName:"$fname"},
+...         numberOfDepartments:{$sum:1}
+...         }
+...     }
+... ])
+
+player> db.employee_info.aggregate([
+...     {$unwind: "$departments"},
+...     {$match:
+...         {empno: {$gte: 3}}
+...     },
+...     {$group:
+...         {_id: {departmentName: "$departments"},
+...         numberOfEmployees: {$sum:1}
+...         }
+...     }
+... ])
+
+player>

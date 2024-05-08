@@ -1,0 +1,6 @@
+{"Pclass": 3,"Sex": "male","Age": 34.5,"SibSp": 0,"Parch": 0,"Fare": 7.8292,"Cabin": "","Embarked": "Q"}
+{"Pclass":3,"Sex":"female","Age":47,"SibSp":1,"Parch":0,"Fare":7,"Cabin":"","Embarked":"S"}
+{"Pclass":2,"Sex":"male","Age":62,"SibSp":0,"Parch":0,"Fare":9.6875,"Cabin":"","Embarked":"Q"}
+{"Pclass":3,"Sex":"male","Age":27,"SibSp":0,"Parch":0,"Fare":8.6625,"Cabin":"","Embarked":"S"}
+{"Pclass":3,"Sex":"female","Age":22,"SibSp":1,"Parch":1,"Fare":12.2875,"Cabin":"","Embarked":"S"}
+{"Pclass":3,"Sex":"male","Age":14,"SibSp":0,"Parch":0,"Fare":9.225,"Cabin":"","Embarked":"S"}
