@@ -1,0 +1,423 @@
+PS E:\Chương trình học\Kì 2 2023-2024\Kĩ thuật và công nghệ dữ liệu lớn\Lab 24-4\Lab 24424 (7-10)-20240504\MongoDB> cd Practice
+PS E:\Chương trình học\Kì 2 2023-2024\Kĩ thuật và công nghệ dữ liệu lớn\Lab 24-4\Lab 24424 (7-10)-20240504\MongoDB\Practice> wsl
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB/Practice$ mongosh 
+Current Mongosh Log ID: 663aeca40f07d0d3ec2202d7
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.5
+Using MongoDB:          7.0.9
+Using Mongosh:          2.2.5
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-05-08T07:23:03.710+07:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2024-05-08T07:23:04.084+07:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2024-05-08T07:23:04.084+07:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never' in this binary version
+   2024-05-08T07:23:04.084+07:00: vm.max_map_count is too low
+------
+
+test>
+[1]+  Stopped                 mongosh
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB/Practice$
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB/Practice$ mongoimp
+ort --db movie --collection movies --file data/data.json
+2024-05-08T10:09:06.069+0700    connected to: mongodb://localhost/
+2024-05-08T10:09:06.072+0700    0 document(s) imported successfully. 0 document(s) failed to import.
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB/Practice$ mongoimport --db movie --collection movies --file data/data.json
+2024-05-08T10:09:15.684+0700    connected to: mongodb://localhost/
+2024-05-08T10:09:15.767+0700    8 document(s) imported successfully. 0 document(s) failed to import.
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB/Practice$ mongosh 
+Current Mongosh Log ID: 663aece5fc8039834a2202d7
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.5
+Using MongoDB:          7.0.9
+Using Mongosh:          2.2.5
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-05-08T07:23:03.710+07:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2024-05-08T07:23:04.084+07:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2024-05-08T07:23:04.084+07:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never' in this binary version        
+   2024-05-08T07:23:04.084+07:00: vm.max_map_count is too low
+------
+
+test> use movie
+switched to db movie
+movie> db.movies.show
+movie.movies.show
+movie> db.movies.find()
+[
+  { _id: ObjectId('663aecdb22991ac37d7c7b36'), title: 'Avatar' },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b37'),
+    title: "Pee Wee Herman's Big Adventure"
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b38'),
+    title: 'The Hobbit: The Desolation of Smaug',
+    writer: 'J.R.R. Tolkein',
+    year: 2013,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b39'),
+    title: 'The Hobbit: The Battle of the Five Armies',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit',
+    synopsis: 'Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness.'
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3a'),
+    title: 'The Hobbit: An Unexpected Journey',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3b'),
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3c'), 
+    title: 'Inglorious Basterds',
+    writer: 'Quentin Tarantino',
+    year: 2009,
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3d'), 
+    title: 'Pulp Fiction',
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ] 
+  }
+]
+movie> db.movies.find({"writer" : "Quentin Tarantino")
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:46)
+
+> 1 | db.movies.find({"writer" : "Quentin Tarantino")
+    |                                          
+     ^
+  2 |
+
+movie> db.movies.find({"writer" : "Quentin Tarantino"})
+[
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3c'), 
+    title: 'Inglorious Basterds',
+    writer: 'Quentin Tarantino',
+    year: 2009,
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3d'), 
+    title: 'Pulp Fiction',
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ] 
+  }
+]
+movie> db.movies.find({ "actors": "Brad Pitt" })
+[
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3b'), 
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]   
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3c'), 
+    title: 'Inglorious Basterds',
+    writer: 'Quentin Tarantino',
+    year: 2009,
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  }
+]
+movie> db.movies.find({"year" : {$gte 1990, $lt: 2000}})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:31)
+
+> 1 | db.movies.find({"year" : {$gte 1990, $lt: 2000}})
+    |                                ^
+  2 |
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB/Practice$ mon
+movie> db.movies.find({"year" : {$gt:e 1990, $l[2]+  Stopped                 mongosh
+Command 'mon' not found, but can be installed with:
+sudo apt install mon
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB/Practice$ 
+wsl@LAPTOP-GFDB5TP5:/mnt/e/Chương trình học/Kì 2 2023-2024/Kĩ thuật và công nghệ dữ liệu lớn/Lab 24-4/Lab 24424 (7-10)-20240504/MongoDB/Practice$ mongosh 
+Current Mongosh Log ID: 663aeeccd3491fdd8c2202d7
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.5
+Using MongoDB:          7.0.9
+Using Mongosh:          2.2.5
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-05-08T07:23:03.710+07:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2024-05-08T07:23:04.084+07:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2024-05-08T07:23:04.084+07:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never' in this binary version        
+   2024-05-08T07:23:04.084+07:00: vm.max_map_count is too low
+------
+
+test> use movie
+switched to db movie
+movie> show collections
+movieDetails
+movies
+movie> db.movies.find({"year" : {$gte: 1990, $lt: 2000}})
+[
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3b'), 
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]   
+  },
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ]
+  }
+]
+movie> db.movies.find({"year" : $or: [{'year': $lt: 2000}, {'year': $gt: 2010}]})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:28)
+
+> 1 | db.movies.find({"year" : $or: [{'year': $lt: 2000}, {'year': $gt: 2010}]})
+    |                             ^
+  2 |
+
+movie> db.movies.find({ $or: [{'year': $lt: 2000}, {'year': $gt: 2010}]})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:35)
+
+> 1 | db.movies.find({ $or: [{'year': $lt: 2000}, {'year': $gt: 2010}]})
+    |                                    ^
+  2 |
+
+movie> db.movies.find({ $or: [{'year': {$lt: 2000}}, {'year': {$gt: 2010}}]})
+[
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b38'),
+    title: 'The Hobbit: The Desolation of Smaug',
+    writer: 'J.R.R. Tolkein',
+    year: 2013,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b39'),
+    title: 'The Hobbit: The Battle of the Five Armies',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit',
+    synopsis: 'Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness.'
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3a'),
+    title: 'The Hobbit: An Unexpected Journey',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit'
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3b'), 
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]   
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3d'), 
+    title: 'Pulp Fiction',
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ] 
+  }
+]
+movie> db.movies.updateMany(
+... { "title": "The Hobbit: An Unexpected Journey" },
+... { $set: { "synopsis": "A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug." } }
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+... { $set: { "synopsis": "The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring." } }
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+movie> db.movies.updateOne(
+... { "title": "The Hobbit: The Desolation of Smaug" },
+... { $set: { "synopsis": "A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug." } }
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+movie> db.movies.updateOne(
+... {"actor" : "Samuel L.Jackson"},
+... {$set: {"movie" : "Pulp Fiction"}}
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+movie> db.movies.updateOne( { "actor": "Samuel L.Jackson" }, { $set: { "title": "Pulp Fiction" } } )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+movie> db.movies.updateOne( { "title": "Pulp Fiction" }, { $set: { "actor": "Samuel L.Jackson" }} )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+movie> db.movies.find({ "synopsis": { $regex: //Bilbo/i } })
+[
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b38'), 
+    title: 'The Hobbit: The Desolation of Smaug',
+    writer: 'J.R.R. Tolkein',
+    year: 2013,
+    franchise: 'The Hobbit',
+    synopsis: 'A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.'
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b39'), 
+    title: 'The Hobbit: The Battle of the Five Armies',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit',
+    synopsis: 'Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness.'
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3a'), 
+    title: 'The Hobbit: An Unexpected Journey',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit',
+    synopsis: 'A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.'
+  }
+]
+movie> db.movies.find({ "synopsis": { $regex: /Gandalf/i } })
+
+movie> db.movies.find({
+... $and:[
+... {"synopsis" : {$regex: /Bildo/i}},
+... {"synopsis" : {$not: /Gandalf/i}}
+... ]
+... })
+
+movie> db.collection.find({ "synopsis": { $not:
+ /Bilbo/i } })
+
+movie> db.movies..find({ "synopsis": { $not: /B/Bilbo/i } })
+Uncaught:
+SyntaxError: Unexpected token (1:10)
+
+> 1 | db.movies..find({ "synopsis": { $not: /Bilbo/i } })
+    |           ^
+  2 |
+
+movie> db.movies.find({ "synopsis": { $not: /Bilbo/i } })
+[
+  { _id: ObjectId('663aecdb22991ac37d7c7b36'), title: 'Avatar' },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b37'), 
+    title: "Pee Wee Herman's Big Adventure"    
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3b'), 
+    title: 'Fight Club',
+    writer: 'Chuck Palahniuk',
+    year: 1999,
+    actors: [ 'Brad Pitt', 'Edward Norton' ]   
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3c'), 
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  },
+  {
+    actors: [ 'Brad Pitt', 'Diane Kruger', 'Eli Roth' ]
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3d'), 
+    title: 'Pulp Fiction',
+    writer: 'Quentin Tarantino',
+    year: 1994,
+    actors: [ 'John Travolta', 'Uma Thurman' ],    actor: 'Samuel L.Jackson'
+  }
+]
+movie> db.movies.find({ $and: [ { "synopsis": { $regex: /Bildo/i } }, { "synopsis": { $not: /Gandalf/i } }] })
+
+movie> db.movies.find({
+... $or: [
+... { "synopsis": { $regex: /dwarves/i } },
+... { "synopsis": { $regex: /hobbit/i } }
+... ]
+... })
+[
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b38'), 
+    title: 'The Hobbit: The Desolation of Smaug',
+    writer: 'J.R.R. Tolkein',
+    year: 2013,
+    franchise: 'The Hobbit',
+    synopsis: 'A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.'
+  },
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b3a'), 
+    title: 'The Hobbit: An Unexpected Journey',
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit',
+    synopsis: 'A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.'
+  }
+]
+movie> db.movies.find({ $and: [ { "gold": { $regex: /dwarves/i } }, { "dragon": { $regex: /hobbit/i } }] })
+
+movie> db.movies.find({ $and: [ { "synopsis": { $regex: /gold/i } }, { "synopsis": { $regex: /dragon/i } }] })
+[
+  {
+    _id: ObjectId('663aecdb22991ac37d7c7b38'), 
+    title: 'The Hobbit: The Desolation of Smaug',
+    writer: 'J.R.R. Tolkein',
+    year: 2013,
+    franchise: 'The Hobbit',
+    synopsis: 'A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.'
+    writer: 'J.R.R. Tolkein',
+    year: 2012,
+    franchise: 'The Hobbit',
+    synopsis: 'A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.'
+  }
+]
+movie> db.movies.deleteMany({"title":"Pee Wee Herman's Big Adventure"})
+{ acknowledged: true, deletedCount: 1 }
+movie> db.movies.deleteMany({"title":"Avatar"})
+{ acknowledged: true, deletedCount: 1 }
+movie>
