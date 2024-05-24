@@ -3,7 +3,7 @@
 - Các tài liệu liên quan được đặt trong thư mục NaiveBayesClassifer, bao gồm:
     + Source code (tệp src):
         * Trong src, class chính là NaiveBayes.class.
-    + File jar được build sẵn (NaiveBayesClassifer.jar) [Link](https://drive.google.com/file/d/10IrveJ5hZj5Um3idVdusQRmj55RCihDA/view?usp=sharing).
+    + File jar được build sẵn (NaiveBayesClassifer.jar) [Link](https://drive.google.com/drive/folders/1sLJ6s0fKA4BZXDSFNkeVp8AzWEPQGufS?usp=sharing).
     + 2 tệp ExampleTrain.txt, ExampleTest.txt để chạy ví dụ.
 ## Chạy:
 - Có thể sử dụng file jar có sẵn hoặc tự build.
