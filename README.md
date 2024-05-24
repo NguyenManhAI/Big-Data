@@ -8,7 +8,7 @@
 ## Chạy:
 - Có thể sử dụng file jar có sẵn hoặc tự build.
 - Chạy lệnh: hadoop jar `<file.jar>` `<Train.txt>` `<Test.txt>` `<List of classes>` `<ouput>`
-- Vd: `hadoop` `jar` `NaiveBayesClassifer.jar` `ExampleTrain.txt` `ExampleTest.txt` `"1,2"` `output`
+- Vd: `hadoop` `jar` `NaiveBayesClassifer.jar` `ExampleTrain.txt` `ExampleTest.txt` `"0,1"` `output`
 - Kết quả có dạng: `Text` `<tab>` `class1:probability1`,`class2:probability2`,...
 - Lưu ý về file Train, Test:
     + file Train: mỗi dòng là 1 cặp Text, class, cách nhau bởi dấu `<tab>`
