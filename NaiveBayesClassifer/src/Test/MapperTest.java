@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class MapperTest extends Mapper<Object, Text, Text, Text> {
     private final Map<String, String> likelihood = new HashMap<>();
@@ -88,8 +89,9 @@ public class MapperTest extends Mapper<Object, Text, Text, Text> {
         String[] parts = data.split("\t");
 
         String line = parts[0];
+        String target = "";
         if(parts.length == 2){
-            String target = parts[1];
+            target = parts[1];
         }
 
         Preprocessing tokLowLem = new Preprocessing();
@@ -153,6 +155,7 @@ public class MapperTest extends Mapper<Object, Text, Text, Text> {
 
         String mapString = sb.toString();
 
+        mapString = !Objects.equals(target, "") ? target + "\t" + mapString : mapString;
 
         Text newKey = new Text(line);
         Text newValue = new Text(mapString);

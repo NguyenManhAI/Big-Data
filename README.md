@@ -7,7 +7,8 @@
     + 2 tệp ExampleTrain.txt, ExampleTest.txt để chạy ví dụ.
 ## Chạy:
 - Có thể sử dụng file jar có sẵn hoặc tự build.
-- Chạy lệnh: hadoop jar `<file.jar>` `<Train.txt>` `<Test.txt>` `<List of classes>` `<ouput>`
+- Chạy lệnh: hadoop jar `<file.jar>` `<Train.txt>` `<Test.txt>` `<List of classes>` `<ouput>` `<optional: true or false, default = true>`
+    - optional: có sử dụng evaluate hay không, mặc định là có sử dụng. Chỉ không sử dụng khi thực hiện inference.
 - Vd: `hadoop` `jar` `NaiveBayesClassifer.jar` `ExampleTrain.txt` `ExampleTest.txt` `"0,1"` `output`
 - Kết quả có dạng: `Text` `<tab>` `class1:probability1`,`class2:probability2`,...
 - Lưu ý về file Train, Test:

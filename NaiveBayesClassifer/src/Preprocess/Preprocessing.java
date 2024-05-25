@@ -15,6 +15,7 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 
+
 public class Preprocessing {
 
     protected StanfordCoreNLP pipeline;
@@ -53,6 +54,7 @@ public class Preprocessing {
 
             }
         }
+
         return lemmas;
     }
 
@@ -107,42 +109,12 @@ public class Preprocessing {
     }
 
     public static void main(String[] args) {
-        System.out.println("Starting Stanford Lemmatizer");
-        String text = "How could you be seeing into my eyes like open doors? \n"+
-                "You led me down into my core where I've became so numb \n"+
-                "Without a soul my spirit's sleeping somewhere cold \n"+
-                "Until you find it there and led it back home \n"+
-                "You woke me up inside \n"+
-                "Called my name and saved me from the dark \n"+
-                "You have bidden my blood and it ran \n"+
-                "Before I would become undone \n"+
-                "You saved me from the nothing I've almost become \n"+
-                "You were bringing me to life \n"+
-                "Now that I knew what I'm without \n"+
-                "You can've just left me \n"+
-                "You breathed into me and made me real \n"+
-                "Frozen inside without your touch \n"+
-                "Without your love, darling \n"+
-                "Only you are the life among the dead \n"+
-                "I've been living a lie, there's nothing inside \n"+
-                "You were Bringing me to Life.";
-        Preprocessing slem = new Preprocessing();
-        String text2 = "I got a wild hair for taffy and ordered this five pound bag. "+
-                "The taffy was all very enjoyable with many flavors: watermelon, root beer, melon, peppermint, "+
-                "grape, etc. My only complaint is there was a bit too much red/black licorice-flavored pieces "+
-                "(just not my particular favorites). Between me, my kids, and my husband, this lasted only two weeks! "+
-                "I would recommend this brand of taffy -- it was a delightful treat.";
-        String text3 = "\"Product arrived labeled as Jumbo Salted Peanuts...the"+
-                " peanuts were actually small sized unsalted. Not sure if this was an error or if the vendor intended" +
-                " to represent the product as \"\"Jumbo\"\".\"\t1";
-        String text4 = "If you are looking for the secret ingredient in Robitussin I believe I have found it."+
-                "  I got this in addition to the Root Beer"+
-                " Extract I ordered (which was good) and made some cherry soda.  The flavor is very medicinal.\t2";
+        String text1 = "I purchased it as I have been informed by my physician<br />to reduce my intake of salt";
         String text5 = "I 'm a doctor.This has been 35 year since I graduated!!!!";
-        String text6 = "That is beautiful item";
-        String text7 = "He love this product like me";
-        String text8 = "She very hate you!";
-        System.out.println(slem.lemmatize(text8));
-    }
+        String text2 = "when added to milk,this leaves a bad aftertaste in the mouth. vanilla essence has a much cleaner and stronger Vendela flavour than this syrup";
+        String text3 = "very good";
 
+        Preprocessing slem = new Preprocessing();
+        System.out.println(slem.lemmatize(text5));
+    }
 }
