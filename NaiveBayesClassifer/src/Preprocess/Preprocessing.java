@@ -19,12 +19,16 @@ import edu.stanford.nlp.util.CoreMap;
 public class Preprocessing {
 
     protected StanfordCoreNLP pipeline;
+    protected List<String> listStopWords;
+    protected List<String> listPunctuations;
 
     public Preprocessing() {
         Properties props;
         props = new Properties();
         props.put("annotators", "tokenize, ssplit, pos, lemma");
         this.pipeline = new StanfordCoreNLP(props);
+        this.listStopWords = getStopWords();
+        this.listPunctuations = getPunctuation();
     }
 
     public List<String> lemmatize(String documentText, Boolean UseStopWord)
@@ -34,7 +38,6 @@ public class Preprocessing {
         Annotation document = new Annotation(documentText);
 
         this.pipeline.annotate(document);
-        List<String> stopWords = getStopWords();
 
         List<CoreMap> sentences = document.get(SentencesAnnotation.class);
         for(CoreMap sentence: sentences) {
@@ -43,9 +46,11 @@ public class Preprocessing {
 
                 String lemma = token.get(LemmaAnnotation.class);
                 if(UseStopWord){
-                    if(!stopWords.contains(lemma) && !isContainPunctuation(lemma)){
+
+                    if(!this.listStopWords.contains(lemma) && !isContainPunctuation(lemma)){
                         lemmas.add(lemma);
                     }
+
                 }else{
                     if(!isContainPunctuation(lemma)){
                         lemmas.add(lemma);
@@ -96,10 +101,9 @@ public class Preprocessing {
         return punctuations;
     }
 
-    public static boolean isContainPunctuation(String a){
-        List<String> punctuations = getPunctuation();
+    public boolean isContainPunctuation(String a){
         boolean result = false;
-        for(String punctuation: punctuations) {
+        for(String punctuation: this.listPunctuations) {
             if (a.contains(punctuation)) {
                 result = true;
                 break;
@@ -110,11 +114,12 @@ public class Preprocessing {
 
     public static void main(String[] args) {
         String text1 = "I purchased it as I have been informed by my physician<br />to reduce my intake of salt";
-        String text5 = "I 'm a doctor.This has been 35 year since I graduated!!!!";
+        String text5 = "I 'm a doctor. This has been 35 year since I graduated!!!!";
         String text2 = "when added to milk,this leaves a bad aftertaste in the mouth. vanilla essence has a much cleaner and stronger Vendela flavour than this syrup";
         String text3 = "very good";
 
         Preprocessing slem = new Preprocessing();
         System.out.println(slem.lemmatize(text5));
+        System.out.println(slem.lemmatize(text2));
     }
 }

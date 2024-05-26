@@ -16,6 +16,7 @@ public class MapperWordClass extends Mapper<Object, Text, Text, IntWritable>{
     private final Text docClassKey = new Text();
     private final IntWritable countValue = new IntWritable();
     private String[] Classes = new String[0];
+    private final Preprocessing tokLowLem = new Preprocessing();
 
     @Override
     protected void setup(Context context) throws IOException, InterruptedException{
@@ -32,7 +33,6 @@ public class MapperWordClass extends Mapper<Object, Text, Text, IntWritable>{
             String sentence = parts[0];
             String docClass = parts[1];
 
-            Preprocessing tokLowLem = new Preprocessing();
             List<String> tokens = tokLowLem.lemmatize(sentence);
 
             for (String token : tokens) {

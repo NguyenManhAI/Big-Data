@@ -21,6 +21,7 @@ public class MapperTest extends Mapper<Object, Text, Text, Text> {
     private final Map<String, String> prior = new HashMap<>();
     private final Map<String, String> countClass = new HashMap<>();
     private String[] Classes = new String[0];
+    private final Preprocessing tokLowLem = new Preprocessing();
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
         Configuration conf = context.getConfiguration();
@@ -94,7 +95,6 @@ public class MapperTest extends Mapper<Object, Text, Text, Text> {
             target = parts[1];
         }
 
-        Preprocessing tokLowLem = new Preprocessing();
         List<String> tokens = tokLowLem.lemmatize(line);
 
         double probability = -1e9;
